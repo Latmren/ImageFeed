@@ -34,7 +34,7 @@ final class ImagesListViewController: UIViewController {
 
 }
 
-// MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(
@@ -45,7 +45,7 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
@@ -90,7 +90,7 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - Private Methods
+    // MARK: - Private Methods
 
 extension ImagesListViewController {
 
@@ -132,11 +132,6 @@ extension ImagesListViewController {
     func configTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-
-        //        tableView.register(
-        //            ImagesListCell.self,
-        //            forCellReuseIdentifier: ImagesListCell.reuseIdentifier
-        //        )
 
         tableView.contentInset = UIEdgeInsets(
             top: 12,
