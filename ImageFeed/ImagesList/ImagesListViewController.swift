@@ -16,6 +16,7 @@ final class ImagesListViewController: UIViewController {
     // MARK: - Properties
 
     private let photoNames = (0..<20).map(String.init)
+    private let showSingleImageSegueIdentifier = "ShowSingleImage"
 
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -33,18 +34,18 @@ final class ImagesListViewController: UIViewController {
 
 }
 
-// MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
     }
 }
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
@@ -89,10 +90,27 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - Private Methods
+    // MARK: - Private Methods
 
 extension ImagesListViewController {
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showSingleImageSegueIdentifier {
+            guard
+                let viewController = segue.destination as? SingleImageViewController,
+                let indexPath = sender as? IndexPath
+            else {
+                assertionFailure("Invalid segue destination")
+                return
+            }
+            
+            let image = UIImage(named: photoNames[indexPath.row])
+            viewController.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+    
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         guard let image = UIImage(named: photoNames[indexPath.row]) else {
             return
@@ -115,11 +133,6 @@ extension ImagesListViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        //        tableView.register(
-        //            ImagesListCell.self,
-        //            forCellReuseIdentifier: ImagesListCell.reuseIdentifier
-        //        )
-
         tableView.contentInset = UIEdgeInsets(
             top: 12,
             left: 0,
@@ -127,4 +140,5 @@ extension ImagesListViewController {
             right: 0
         )
     }
+    
 }
