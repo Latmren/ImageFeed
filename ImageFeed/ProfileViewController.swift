@@ -9,11 +9,11 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     // MARK: - Properties
-    private var userPicView: UIImageView!
-    private var userNameLabel: UILabel!
-    private var userLoginNameLabel: UILabel!
-    private var userDescriptionLabel: UILabel!
-    private var logoutButton: UIButton!
+    private lazy var userPicView = UIImageView()
+    private lazy var userNameLabel = UILabel()
+    private lazy var userLoginNameLabel = UILabel()
+    private lazy var userDescriptionLabel = UILabel()
+    private lazy var logoutButton = UIButton()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -27,13 +27,13 @@ final class ProfileViewController: UIViewController {
         userPicInitialize()
         userNameLabelInitialize()
         userLoginNameLabelInitialize()
-        userDescriptionLabelInitizalize()
+        userDescriptionLabelInitialize()
         logoutButtonInitialize()
         setupConstraints()
     }
     
     private func userPicInitialize() {
-        let profileImage = UIImage(named: "mock_user_pic")
+        let profileImage = UIImage(resource: .mockUserPic)
         let userPicView = UIImageView(image: profileImage)
         
         view.addSubview(userPicView)
@@ -65,7 +65,7 @@ final class ProfileViewController: UIViewController {
         self.userLoginNameLabel = userLoginNameLabel
     }
     
-    private func userDescriptionLabelInitizalize() {
+    private func userDescriptionLabelInitialize() {
         let userDescriptionLabel = UILabel()
         userDescriptionLabel.text = "Hello, world!"
         userDescriptionLabel.textColor = .ypWhite
@@ -77,7 +77,7 @@ final class ProfileViewController: UIViewController {
     }
     
     private func logoutButtonInitialize() {
-        let logoutImage = UIImage(named: "exit")
+        let logoutImage = UIImage(resource: .exit)
         
         let logoutButton = UIButton()
         logoutButton.setImage(logoutImage, for: .normal)
