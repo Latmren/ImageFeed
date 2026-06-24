@@ -60,7 +60,9 @@ final class OAuth2Service {
                 string: "https://unsplash.com/oauth/token"
             )
         else {
-            print("Error: Invalid URL, missing scheme or host")
+            assertionFailure(
+                "Error in OAuth2Service: Invalid URL, missing scheme or host"
+            )
             return nil
         }
 
@@ -73,7 +75,9 @@ final class OAuth2Service {
         ]
 
         guard let authTokenUrl = urlComponents.url else {
-            print("Error: Invalid URL, missing query items")
+            assertionFailure(
+                "Error in OAuth2Service: Invalid URL, missing query items"
+            )
             return nil
         }
 

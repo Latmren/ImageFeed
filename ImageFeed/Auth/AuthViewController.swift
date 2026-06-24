@@ -62,7 +62,10 @@ extension AuthViewController: WebViewViewControllerDelegate {
     ) {
 
         fetchOAuthToken(code) { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self else {
+                assertionFailure("self is nil")
+                return
+            }
 
             switch result {
             case .success:

@@ -85,6 +85,9 @@ final class WebViewViewController: UIViewController {
                 string: WebViewConstants.unsplashAuthorizeURLString
             )
         else {
+            assertionFailure(
+                "Error in WebViewViewController: Invalid URL, missing scheme or host"
+            )
             return
         }
 
@@ -96,6 +99,9 @@ final class WebViewViewController: UIViewController {
         ]
 
         guard let url = urlComponents.url else {
+            assertionFailure(
+                "Error in WebViewViewController: Invalid URL, missing query items"
+            )
             return
         }
 
